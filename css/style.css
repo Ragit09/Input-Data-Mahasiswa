@@ -1,0 +1,44 @@
+body {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+main {
+  max-width: 1000px;
+}
+
+/* NAVBAR BUTTON STYLE */
+.nav-btn {
+  min-width: 140px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+/* TABLE */
+.table th, .table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* RESPONSIVE BUTTONS */
+.btn {
+  touch-action: manipulation;
+  min-height: 44px;
+}
+
+@media (max-width: 768px) {
+  .nav-btn {
+    width: 100%;
+  }
+  .navbar-brand {
+    font-size: 1rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+}
