@@ -1,58 +1,37 @@
-// js/uiHandler.js
-export function renderTable(data = []) {
+export function renderTable(data) {
   const tbody = document.querySelector('#mahasiswaTable tbody');
   tbody.innerHTML = '';
 
-  data.forEach((item, idx) => {
-    // tombol aksi: untuk desktop side-by-side; untuk mobile CSS akan tumpuk
+  if (!data || data.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">Belum ada data.</td></tr>';
+    return;
+  }
+
+  data.forEach((item, index) => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td class="text-center">${idx + 1}</td>
-      <td>${escapeHtml(item.nama)}</td>
-      <td>${escapeHtml(item.nim)}</td>
-      <td>${escapeHtml(item.mataKuliah)}</td>
-      <td class="text-center">${escapeHtml(String(item.nilai))}</td>
-      <td>
-        <div class="d-flex gap-2 justify-content-center flex-wrap">
-          <button type="button" class="btn btn-warning btn-edit" data-id="${item.id}" aria-label="Edit ${escapeHtml(item.nama)}">Edit</button>
-          <button type="button" class="btn btn-danger btn-delete" data-id="${item.id}" aria-label="Hapus ${escapeHtml(item.nama)}">Hapus</button>
-        </div>
-      </td>
+      <td>${index + 1}</td>
+      <td>${item.nama}</td>
+      <td>${item.nim}</td>
+      <td>${item.kode || '-'}</td>
+      <td>${item.mataKuliah}</td>
+      <td>${item.nilai}</td>
     `;
     tbody.appendChild(tr);
   });
 }
 
 export function clearForm() {
-  const form = document.getElementById('nilaiForm');
-  form.reset();
-  document.getElementById('docId').value = '';
-  document.getElementById('btnSimpan').textContent = 'Simpan Nilai';
+  document.getElementById('nilaiForm').reset();
 }
 
-export function showAlert(message, type = 'info', timeout = 3500) {
-  const area = document.getElementById('alertArea');
-  const id = 'alert-' + Date.now();
-  const html = `
-    <div id="${id}" class="alert alert-${type} alert-dismissible fade show" role="alert">
-      ${escapeHtml(message)}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+export function showAlert(message, type = 'info') {
+  const alertArea = document.getElementById('alertArea');
+  alertArea.innerHTML = `
+    <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+      ${message}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
   `;
-  area.insertAdjacentHTML('beforeend', html);
-  if (timeout > 0) {
-    setTimeout(() => {
-      const el = document.getElementById(id);
-      if (el) el.remove();
-    }, timeout);
-  }
-}
-
-function escapeHtml(str) {
-  return String(str)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
+  setTimeout(() => alertArea.innerHTML = '', 4000);
 }

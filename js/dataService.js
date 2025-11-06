@@ -1,53 +1,51 @@
-// js/dataService.js
-import { db } from './firebaseConfig.js';
-import {
-  collection, addDoc, onSnapshot, doc, updateDoc,
-  deleteDoc, query, orderBy, getDocs
-} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+// === FIREBASE CONFIG DAN FIRESTORE ===
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, addDoc, onSnapshot, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const collRef = collection(db, 'mahasiswa');
+const firebaseConfig = {
+  apiKey: "AIzaSyDyyFgho0Cd8CLX6RN7mpLTGhbjikfhZ7w",
+  authDomain: "input-nilai-mahasiswa-7.firebaseapp.com",
+  projectId: "input-nilai-mahasiswa-7",
+  storageBucket: "input-nilai-mahasiswa-7.firebasestorage.app",
+  messagingSenderId: "499799144209",
+  appId: "1:499799144209:web:ac18fe581437f037a1beb0",
+  measurementId: "G-95Y691FXRG"
+};
 
+// Inisialisasi Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// === SIMPAN DATA MAHASISWA ===
 export async function simpanData(data) {
-  const payload = {
-    nama: data.nama.trim(),
-    nim: data.nim.trim(),
+  // Data sekarang termasuk kode MK
+  const docRef = await addDoc(collection(db, "mahasiswa"), {
+    nama: data.nama,
+    nim: data.nim,
+    kode: data.kode, // <--- ditambahkan
     mataKuliah: data.mataKuliah,
-    nilai: Number(data.nilai)
-  };
-  return addDoc(collRef, payload);
-}
-
-export async function updateData(id, data) {
-  const ref = doc(db, 'mahasiswa', id);
-  return updateDoc(ref, {
-    nama: data.nama.trim(),
-    nim: data.nim.trim(),
-    mataKuliah: data.mataKuliah,
-    nilai: Number(data.nilai)
+    nilai: data.nilai
   });
+  console.log("Data disimpan dengan ID:", docRef.id);
 }
 
-export async function deleteData(id) {
-  const ref = doc(db, 'mahasiswa', id);
-  return deleteDoc(ref);
-}
-
+// === LOAD DATA REALTIME ===
 export function loadDataRealtime(callback) {
-  const q = query(collRef, orderBy('nama'));
-  return onSnapshot(q, snapshot => {
-    const arr = [];
-    snapshot.forEach(d => arr.push({ id: d.id, ...d.data() }));
-    callback(arr);
-  }, err => {
-    console.error('onSnapshot error', err);
-    callback([]);
+  const colRef = collection(db, "mahasiswa");
+  onSnapshot(colRef, (snapshot) => {
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    callback(data);
   });
 }
 
+// === LOAD DATA SEKALI SAJA (untuk refresh) ===
 export async function loadDataOnce() {
-  const q = query(collRef, orderBy('nama'));
-  const snap = await getDocs(q);
-  const arr = [];
-  snap.forEach(d => arr.push({ id: d.id, ...d.data() }));
-  return arr;
+  const querySnapshot = await getDocs(collection(db, "mahasiswa"));
+  return querySnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
 }
