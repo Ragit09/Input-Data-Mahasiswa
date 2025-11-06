@@ -8,22 +8,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnRefresh = document.getElementById('btnRefresh');
   const form = document.getElementById('nilaiForm');
 
-  // Navbar dinamis (1 tombol tiap dashboard)
+  // Navbar dinamis (tanpa emoji, tanpa hamburger)
   function setNavbar(mode) {
     navContainer.innerHTML = '';
     const btn = document.createElement('button');
     btn.className = 'btn btn-light fw-semibold nav-btn';
     if (mode === 'input') {
-      btn.textContent = '📑 Data Mahasiswa';
+      btn.textContent = 'Data Mahasiswa';
       btn.onclick = showData;
     } else {
-      btn.textContent = '📋 Input Nilai';
+      btn.textContent = 'Input Nilai';
       btn.onclick = showInput;
     }
     navContainer.appendChild(btn);
   }
 
-  // Fungsi tampilkan dashboard
+  // Tampilkan dashboard
   function showInput() {
     document.getElementById('inputDashboard').classList.remove('d-none');
     document.getElementById('dataDashboard').classList.add('d-none');
@@ -38,12 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   btnClear.addEventListener('click', clearForm);
 
-  // Fungsi submit data
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const nama = document.getElementById('nama').value.trim();
     const nim = document.getElementById('nim').value.trim();
-    const mkValue = document.getElementById('mk').value; // format: MK001|Multimedia
+    const mkValue = document.getElementById('mk').value;
     const nilai = document.getElementById('nilai').value;
 
     if (!mkValue.includes('|')) return showAlert('Format mata kuliah tidak valid', 'danger');
