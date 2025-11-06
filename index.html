@@ -23,41 +23,47 @@
 
     <!-- DASHBOARD INPUT -->
     <section id="inputDashboard">
-      <h3 class="mb-3 fw-semibold">Form Input Nilai Mahasiswa</h3>
-      <form id="nilaiForm" class="row g-3">
-        <div class="col-md-6">
-          <label for="nama" class="form-label">Nama Mahasiswa</label>
-          <input type="text" id="nama" class="form-control" placeholder="Masukkan nama mahasiswa" required>
-        </div>
+      <h4 class="fw-semibold mb-3">Form Input Nilai Mahasiswa</h4>
 
-        <div class="col-md-6">
-          <label for="nim" class="form-label">NIM</label>
-          <input type="text" id="nim" class="form-control" placeholder="Masukkan NIM" required>
-        </div>
+      <div class="card shadow-sm border">
+        <div class="card-body">
+          <form id="nilaiForm" class="d-flex flex-column gap-3">
+            
+            <div>
+              <label for="nama" class="form-label fw-semibold">Nama Mahasiswa</label>
+              <input type="text" id="nama" class="form-control" placeholder="Masukkan nama mahasiswa" required>
+            </div>
 
-        <div class="col-md-6">
-          <label for="mk" class="form-label">Mata Kuliah</label>
-          <select id="mk" class="form-select" required>
-            <option value="">-- Pilih Mata Kuliah --</option>
-            <option value="MK001|Multimedia">MK001 - Multimedia</option>
-            <option value="MK002|TechnoPreuneurship">MK002 - TechnoPreuneurship</option>
-            <option value="MK003|Pemrograman Mobile">MK003 - Pemrograman Mobile</option>
-            <option value="MK004|Rekayasa Perangkat Lunak">MK004 - Rekayasa Perangkat Lunak</option>
-            <option value="MK005|Testing dan Implementasi Sistem">MK005 - Testing dan Implementasi Sistem</option>
-            <option value="MK006|Manajemen Risiko">MK006 - Manajemen Risiko</option>
-          </select>
-        </div>
+            <div>
+              <label for="nim" class="form-label fw-semibold">NIM</label>
+              <input type="text" id="nim" class="form-control" placeholder="Masukkan NIM" required>
+            </div>
 
-        <div class="col-md-3">
-          <label for="nilai" class="form-label">Nilai</label>
-          <input type="number" id="nilai" class="form-control" placeholder="0 - 100" min="0" max="100" required>
-        </div>
+            <div>
+              <label for="mk" class="form-label fw-semibold">Mata Kuliah</label>
+              <select id="mk" class="form-select" required>
+                <option value="">-- Pilih Mata Kuliah --</option>
+                <option value="MK001|Multimedia">MK001 - Multimedia</option>
+                <option value="MK002|TechnoPreuneurship">MK002 - TechnoPreuneurship</option>
+                <option value="MK003|Pemrograman Mobile">MK003 - Pemrograman Mobile</option>
+                <option value="MK004|Rekayasa Perangkat Lunak">MK004 - Rekayasa Perangkat Lunak</option>
+                <option value="MK005|Testing dan Implementasi Sistem">MK005 - Testing dan Implementasi Sistem</option>
+                <option value="MK006|Manajemen Risiko">MK006 - Manajemen Risiko</option>
+              </select>
+            </div>
 
-        <div class="col-12 d-flex gap-2 flex-wrap">
-          <button type="submit" class="btn btn-success" id="btnSimpan">Simpan Nilai</button>
-          <button type="button" class="btn btn-secondary" id="btnClear">Clear</button>
+            <div>
+              <label for="nilai" class="form-label fw-semibold">Nilai</label>
+              <input type="number" id="nilai" class="form-control" placeholder="0 - 100" min="0" max="100" required>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 mt-2 flex-wrap">
+              <button type="submit" class="btn btn-success px-4" id="btnSimpan">Simpan Nilai</button>
+              <button type="button" class="btn btn-secondary px-4" id="btnClear">Clear</button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </section>
 
     <!-- DASHBOARD DATA -->

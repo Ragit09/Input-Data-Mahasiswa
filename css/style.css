@@ -1,44 +1,67 @@
 body {
-  background-color: #f8f9fa;
-  min-height: 100vh;
+  background-color: #f7f9fb;
 }
 
-main {
-  max-width: 1000px;
+/* Kotak form */
+.card {
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  padding: 10px 15px;
 }
 
-/* NAVBAR BUTTON STYLE */
-.nav-btn {
-  min-width: 140px;
+/* Judul form dan tabel */
+h4 {
+  color: #222;
+  font-size: 1.6rem; /* ✅ ukuran lebih besar, seimbang dengan Data Mahasiswa */
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.6rem; /* ✅ biar ukuran Data Mahasiswa juga sama */
+  font-weight: 600;
+  color: #222;
+}
+
+/* Label dan input */
+.form-label {
+  margin-bottom: 6px;
+  color: #333;
+}
+
+input.form-control,
+select.form-select {
   border-radius: 6px;
-  transition: all 0.3s ease;
+  border: 1px solid #ccc;
+  padding: 10px;
+  transition: border-color 0.2s ease-in-out;
 }
 
-.nav-btn:hover {
-  transform: translateY(-1px);
-  opacity: 0.9;
+input.form-control:focus,
+select.form-select:focus {
+  border-color: #007bff;
+  box-shadow: none;
 }
 
-/* TABLE */
+/* Tombol */
+.btn {
+  border-radius: 6px;
+}
+
+/* === TABEL === */
+.table {
+  background-color: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  text-align: center;
+}
+
 .table th, .table td {
   vertical-align: middle;
   text-align: center;
 }
 
-/* RESPONSIVE BUTTONS */
-.btn {
-  touch-action: manipulation;
-  min-height: 44px;
-}
-
-@media (max-width: 768px) {
-  .nav-btn {
-    width: 100%;
-  }
-  .navbar-brand {
-    font-size: 1rem;
-  }
-  h3 {
-    font-size: 1.2rem;
-  }
+/* Animasi dashboard */
+#inputDashboard, #dataDashboard {
+  transition: all 0.3s ease;
 }
